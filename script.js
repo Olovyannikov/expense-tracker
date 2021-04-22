@@ -12,3 +12,32 @@ const dummyTransactions = [
     { id: 3, text: 'Book', amount: -10 },
     { id: 4, text: 'Camera', amount: 150 },
 ];
+
+let transactions = dummyTransactions;
+
+//Add transactions to DOM list
+const addTransactionDOM = transaction => {
+    // Get sign
+    const sign = transaction.amount < 0 ? '-' : '+';
+    const item = document.createElement('li');
+
+    //Add class based on value
+    item.classList.add(transaction.amount < 0 ? 'minus' : 'plus');
+
+    item.innerHTML = `
+        ${transaction.text} <span>${sign}${Math.abs(transaction.amount)}</span>
+        <button class="delete-btn">Delete</button>
+    `;
+
+    $list.append(item);
+}
+
+//Init app
+
+const init = () => {
+    $list.innerHTML = ``;
+
+    transactions.forEach(addTransactionDOM);
+}
+
+init();
